@@ -10,7 +10,6 @@ bool checkBox(shared_ptr<char>, int boxNum = 1);
 
 int main() {
     string fileName; //string to take input
-    //char *sudokuArray = new char[81];
     shared_ptr<char> sudoku_SmartPtr(new char[81]);
     string line;
 
@@ -26,8 +25,8 @@ int main() {
     {
         string puzzleNum;
         getline(ifile, puzzleNum);//get the puzzle number
-        //cout << "\nPuzzle number: " << puzzleNum;//print out puzzle number
         cout << "\n" << puzzleNum;
+        
         //go thru file and populate the array with the puzzle
         for (int i = 0; i < 9; ++i)
         {
@@ -36,15 +35,8 @@ int main() {
             {
                 sudoku_SmartPtr.get()[(i*9)+j] = line[j];
             }
-        } /*//code to print out each puzzle:
-        for (int i = 1; i <= 81; ++i)
-        {
-            cout << sudoku_SmartPtr.get()[i-1];
-            if ((i) %9 == 0 && i != 0)
-            {
-                cout << "\n";
-            }
-        }*/
+        }
+
         if(checkRow(sudoku_SmartPtr))//if puzzle returns true in the checkRow function call checkColumn function
         {
             if (checkCol(sudoku_SmartPtr))//if puzzle returns true in checkCol function call checkBox function
@@ -69,6 +61,7 @@ int main() {
 bool checkRow(shared_ptr<char> arr)
 {
     int rowNum = 1; //will keep track of what row we are on
+    
     /*counter variables to count how many times we use digits 1-9 each loop.
     If the counter is > than 1 there's duplicate digit, will reset the counter variables back to zero after each loop*/
     int num1Count=0, num2Count=0, num3Count=0, num4Count=0,
@@ -1781,10 +1774,8 @@ bool checkCol(shared_ptr<char> const arr)
 bool checkBox(shared_ptr<char> const arr, int boxNum)
 {
     int spaces = 0;
-    //unique_ptr<int> spacesPtr(new int spaces = 0);//counts how many spaces we have inside of puzzle
     bool status = true;
     int counter; //use to iterate on last row of each 
-    //unique_ptr<int> counterPtr(&counter); //points to counter so we can edit counter inside loops 
     string boxLoc; //a string to indicate what box/ we are in
     int num1Count=0, num2Count=0, num3Count=0, num4Count=0,
     num5Count=0, num6Count=0, num7Count=0, num8Count=0, num9Count=0;
